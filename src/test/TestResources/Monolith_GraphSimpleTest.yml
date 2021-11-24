@@ -1,0 +1,71 @@
+version: edm_1_0
+
+description: Very simple example
+
+metadata:
+  maintainer: Tester
+
+components:
+  component1: 
+    type: software_component
+    relations:
+      - hosted_on: component2
+      - depends_on: component3
+      - depends_on: component4
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: true
+  component2:
+    type: compute
+    relations: 
+      - depends_on: component3
+      - depends_on: component4
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  component3:
+    type: software_component
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  component4:
+    type: compute
+    relations:
+      - depends_on: component3
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+    
+component_types:
+  base:
+    extends: null
+    properties:
+      stackID:
+        type: string
+        description: Specifies the ID of the stack
+        default_value: 1
+      isBusinessLogicComponent:
+        type: string
+        description: Specifies if the component is a Business Logic Component
+        default_value: false
+  compute:
+    extends: base
+    properties:
+      os_family:
+        type: string
+        description: Specifies the type of operating system
+        default_value: linux
+    operations:
+      configure: configure.sh
+  software_component:
+    extends: base
+
+relation_types:
+  depends_on:
+    extends: null
+    operations:
+      post_configure_target: add.sh
+  hosted_on:
+    extends: depends_on
+  connects_to:
+    extends: depends_on

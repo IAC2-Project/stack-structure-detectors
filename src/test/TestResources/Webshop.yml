@@ -1,0 +1,119 @@
+version: edm_1_0
+
+description: Very simple example
+
+metadata:
+  maintainer: Tester
+
+components:
+  lookAtTheProduct:
+    type: software_component
+    relations:
+      - depends_on: database1
+      - depends_on: redis1
+      - depends_on: addProductToShoppingCart
+      - hosted_on: ubuntu1
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: true
+  addProductToShoppingCart:
+    type: compute
+    relations: 
+      - depends_on: database1
+      - depends_on: redis1
+      - depends_on: orderingSystem
+      - hosted_on: ubuntu1
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  ubuntu1:
+    type: software_component
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  redis1:
+    type: compute
+    relations:
+      - hosted_on: ubuntu1
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  database1:
+    type: compute
+    relations:
+      - hosted_on: ubuntu1
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  orderingSystem:
+    type: compute
+    relations:
+      - depends_on: database2
+      - depends_on: redis2
+      - depends_on: paymentService
+      - hosted_on: ubuntu2
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: true
+  paymentService:
+    type: compute
+    relations:
+      - depends_on: database2
+      - depends_on: redis2
+      - hosted_on: ubuntu2
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  redis2:
+    type: compute
+    relations:
+      - hosted_on: ubuntu2
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  database2:
+    type: compute
+    relations:
+      - hosted_on: ubuntu2
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+  ubuntu2:
+    type: software_component
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+
+component_types:
+  base:
+    extends: null
+    properties:
+      stackID:
+        type: string
+        description: Specifies the ID of the stack
+        default_value: 1
+      isBusinessLogicComponent:
+        type: string
+        description: Specifies if the component is a Business Logic Component
+        default_value: false
+  compute:
+    extends: base
+    properties:
+      os_family:
+        type: string
+        description: Specifies the type of operating system
+        default_value: linux
+    operations:
+      configure: configure.sh
+  software_component:
+    extends: base
+
+relation_types:
+  depends_on:
+    extends: null
+    operations:
+      post_configure_target: add.sh
+  hosted_on:
+    extends: depends_on
+  connects_to:
+    extends: depends_on

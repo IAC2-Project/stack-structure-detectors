@@ -1,0 +1,88 @@
+---
+#Name: scenario_iaas_single_compute.yml
+version: edm_1_0
+
+components:
+  pet_clinic:
+    type: web_application
+    relations:
+      - hosted_on: pet_clinic_tomcat
+      - connects_to: db
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: true
+  pet_clinic_tomcat:
+    type: tomcat
+    relations:
+      - hosted_on: ubuntu
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+
+  db:
+    type: mysql_database
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+    relations:
+      - hosted_on: dbms
+
+  dbms:
+    type: mysql_dbms
+    relations:
+      - hosted_on: ubuntu
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+
+  ubuntu:
+    type: compute
+    properties:
+      stackID: 1
+      isBusinessLogicComponent: false
+
+###############################################
+## Component Types
+###############################################
+component_types:
+  base:
+    extends: null
+    description: The base type
+
+  software_component:
+    extends: base
+
+  compute:
+    extends: base
+
+  web_server:
+    extends: software_component
+
+  web_application:
+    extends: base
+
+  dbms:
+    extends: software_component
+
+  database:
+    extends: base
+
+  tomcat:
+    extends: web_server
+
+  mysql_dbms:
+    extends: dbms
+
+  mysql_database:
+    extends: database
+
+###############################################
+## Relation Types
+###############################################
+relation_types:
+  depends_on:
+    extends: null
+  hosted_on:
+    extends: depends_on
+  connects_to:
+    extends: depends_on

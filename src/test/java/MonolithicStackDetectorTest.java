@@ -79,7 +79,7 @@ class MonolithicStackDetectorTest {
     @Test
     void ScorePetClinicTwoStacks() {
         DeploymentModel model = loadModelFromFile(petClinic2Stacks);
-        MonolithicStackDetector test = new MonolithicStackDetector(4, 3, new PropertyStackFinder());
+        MonolithicStackDetector test = new MonolithicStackDetector(2, 1, new PropertyStackFinder());
         assertNotNull(test.calculateScore(model));
         double ScoreMonolithicStack = test.calculateScore(model).getScore();
         assertEquals(0.833, ScoreMonolithicStack, 1e-3);

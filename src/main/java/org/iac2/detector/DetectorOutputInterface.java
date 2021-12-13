@@ -1,3 +1,5 @@
+package org.iac2.detector;
+
 import io.github.edmm.model.DeploymentModel;
 
 import java.io.BufferedWriter;

@@ -1,3 +1,5 @@
+package org.iac2.detector;
+
 import io.github.edmm.model.component.RootComponent;
 import io.github.edmm.model.relation.RootRelation;
 import org.jgrapht.Graph;

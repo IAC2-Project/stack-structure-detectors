@@ -1,7 +1,9 @@
-import componentFinders.BusinessLogicServiceFinder;
-import componentFinders.PropertyStackFinder;
+import org.iac2.detector.componentFinders.BusinessLogicServiceFinder;
+import org.iac2.detector.componentFinders.PropertyStackFinder;
 import io.github.edmm.core.parser.EntityGraph;
 import io.github.edmm.model.DeploymentModel;
+import org.iac2.detector.MicroStackDetector;
+import org.iac2.detector.OutputMicroStackDetector;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;

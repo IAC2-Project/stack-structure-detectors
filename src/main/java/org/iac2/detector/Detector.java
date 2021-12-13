@@ -1,7 +1,9 @@
-import componentFinders.BusinessLogicServiceFinder;
-import componentFinders.ComponentsFinder;
-import componentFinders.PropertyServiceFinder;
-import componentFinders.PropertyStackFinder;
+package org.iac2.detector;
+
+import org.iac2.detector.componentFinders.BusinessLogicServiceFinder;
+import org.iac2.detector.componentFinders.ComponentsFinder;
+import org.iac2.detector.componentFinders.PropertyServiceFinder;
+import org.iac2.detector.componentFinders.PropertyStackFinder;
 import io.github.edmm.core.parser.EntityGraph;
 import io.github.edmm.model.DeploymentModel;
 import org.apache.commons.cli.*;
@@ -155,7 +157,7 @@ public class Detector {
 
     private static void printHelp(String detectorName) {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("Detector [detectorName]", getOptions(detectorName));
+        formatter.printHelp("org.iac2.detector.Detector [detectorName]", getOptions(detectorName));
     }
 
     private static DeploymentModel getDeploymentModelFromFile(final String filename) {

@@ -1,5 +1,7 @@
-import componentFinders.BusinessLogicServiceFinder;
-import componentFinders.ComponentsFinder;
+package org.iac2.detector;
+
+import org.iac2.detector.componentFinders.BusinessLogicServiceFinder;
+import org.iac2.detector.componentFinders.ComponentsFinder;
 import io.github.edmm.core.parser.EntityGraph;
 import io.github.edmm.model.DeploymentModel;
 import io.github.edmm.model.component.RootComponent;
@@ -84,7 +86,7 @@ public class ServiceFinder {
 
     private static void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("ServiceFinder", getOptions());
+        formatter.printHelp("org.iac2.detector.ServiceFinder", getOptions());
     }
 
     private static DeploymentModel getDeploymentModelFromFile(final String filename) {

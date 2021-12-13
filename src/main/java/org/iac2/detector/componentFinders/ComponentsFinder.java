@@ -1,4 +1,4 @@
-package componentFinders;
+package org.iac2.detector.componentFinders;
 
 import io.github.edmm.model.DeploymentModel;
 import io.github.edmm.model.component.RootComponent;

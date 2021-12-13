@@ -35,7 +35,7 @@ components:
     relations:
       - hosted_on: dbms
     properties:
-      stackID: 1
+      stackID: 2
       isBusinessLogicComponent: false
 
   dbms:
@@ -43,13 +43,13 @@ components:
     relations:
       - hosted_on: db_ubuntu
     properties:
-      stackID: 1
+      stackID: 2
       isBusinessLogicComponent: false
 
   db_ubuntu:
     type: compute
     properties:
-      stackID: 1
+      stackID: 2
       isBusinessLogicComponent: false
 
 ###############################################
